@@ -91,6 +91,10 @@ export default {
 			type:    [ String, Array, Function ],
 			default: null,
 		},
+		immediateProcessRows: {
+			type:    Boolean,
+			default: true,
+		},
 	},
 	data: () => ({
 		sortBy:        null,
@@ -121,13 +125,16 @@ export default {
 		this.$datatables[this.name] = this;
 		this.$root.$emit('table.ready', this.name);
 
-		this.$watch(() => this.data, this.processRows, {deep: true});
+		this.$watch(() => this.data, this.processRows, {
+			deep:      true,
+			immediate: false,
+		});
+		this.$watch('columns', this.processRows, {immediate: false});
+		this.$watch(() => this.filterBy + this.perPage + this.page + this.sortBy + this.sortDir, this.processRows, {immediate: false});
 
-		this.$watch('columns', this.processRows);
-
-		this.$watch(() => this.filterBy + this.perPage + this.page + this.sortBy + this.sortDir, this.processRows);
-
-		this.processRows();
+		if (this.immediateProcessRows){
+			this.processRows();
+		}
 	},
 	methods: {
 		/**
