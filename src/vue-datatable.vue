@@ -42,7 +42,7 @@
 	</table>
 </template>
 
-<script>
+<script lang="js">
 import Column from './classes/column.js';
 
 /**
@@ -119,7 +119,7 @@ export default {
 	},
 	created(){
 		this.$datatables[this.name] = this;
-		this.$root.$emit('table.ready', this.name);
+		this.$root.$emit('vuejs-datatable::ready', this.name);
 
 		this.$watch(() => this.data, this.processRows, {deep: true});
 

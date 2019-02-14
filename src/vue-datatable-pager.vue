@@ -200,7 +200,7 @@ export default {
 			return;
 		}
 
-		this.$root.$on('table.ready', tableName => {
+		this.$root.$on('vuejs-datatable::ready', tableName => {
 			if (tableName === this.table){
 				this.tableInstance = this.$datatables[this.table];
 				this.tableInstance.perPage = this.perPage;
