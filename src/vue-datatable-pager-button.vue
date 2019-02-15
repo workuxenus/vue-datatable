@@ -2,7 +2,7 @@
 
 <template>
 	<li :class="li_classes">
-		<a href="javascript: void(0);" :class="a_classes" @click="sendClick">
+		<a href="javascript: void(0);" :class="a_classes" @click.prevent="sendClick">
 			<slot>{{ value }}</slot>
 		</a>
 	</li>
